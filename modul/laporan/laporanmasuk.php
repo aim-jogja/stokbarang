@@ -40,7 +40,7 @@ include_once "../../config/fungsi_indotgl.php";
 <center>
 <table border="1" align="#">
 <tr>
-  <td width="500" height="#" >
+  <td width="790" height="#" >
   <table>
     <tr>
     <td colspan="#" width="1500" height="30">
@@ -58,8 +58,8 @@ include_once "../../config/fungsi_indotgl.php";
                   <th>Kode Barang</th>
                   <th>Nama Barang</th>
 				  <th>Quantity</th>
-				  <th>Harga </th>
-				  <th>Jumlah </th>
+				  <th width="14%">Harga </th>
+				  <th width="14%">Jumlah </th>
 		</tr>
 	</thead>
 	<tbody>
@@ -69,7 +69,7 @@ include_once "../../config/fungsi_indotgl.php";
 
 	$bulan 	= $_POST['bulan'];
 	$tahun	= $_POST['tahun'];
-	
+	$ht = 0;
 	$mySql = "SELECT * FROM masuk,stock 
 				WHERE masuk.kodebarang = stock.kodebarang 
 				AND month(tanggalmasuk) = '$bulan' AND year(tanggalmasuk) = '$tahun'
@@ -78,7 +78,7 @@ include_once "../../config/fungsi_indotgl.php";
 	$nomor = 0; 
 	while ($myData = mysql_fetch_array($myQry)) {
 	$nomor++;
-	
+	$ht += ($myData['harga'] * $myData['quantity']);
 ?>
 
 
@@ -91,8 +91,8 @@ include_once "../../config/fungsi_indotgl.php";
 					<td><?php echo $myData['kodebarang']; ?></td>
 					<td><?php echo $myData['namabarang']; ?></td>
 					<td><?php echo $myData['quantity']; ?></td>
-					<td><?php echo $myData['harga']; ?></td>
-					<td><?php echo $myData['jumlah'] ; ?></td>
+					<td><?php echo "Rp. ".number_format($myData['harga'], 0, ".", "."); ?></td>
+					<td><?php echo "Rp. ".number_format($myData['harga'] * $myData['quantity'], 0, ".", "."); ?></td>
 		</tr>
 		<?php 
 			$no++;
@@ -109,7 +109,8 @@ include_once "../../config/fungsi_indotgl.php";
 ?>		
 		<tr>
 			<td colspan="6"><b>Total </b></td>
-			<td align="leaf"><b><?php echo number_format($total_masuk); ?></b></td>
+			<td align="leaf"><b><?php echo "Rp. ".number_format($total_masuk, 0, ".", "."); ?></b></td>
+			<td align="leaf"><b><?php echo "Rp. ".number_format($ht, 0, ".", "."); ?></b></td>
 		</tr>
 
 

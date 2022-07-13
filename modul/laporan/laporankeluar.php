@@ -38,7 +38,7 @@ include_once "../../config/fungsi_indotgl.php";
 <center>
 <table border="1" align="#">
 <tr>
-  <td width="700" height="#" >
+  <td width="790" height="#" >
   <table>
     <tr>
     <td colspan="#" width="1500" height="30">
@@ -56,8 +56,8 @@ include_once "../../config/fungsi_indotgl.php";
                   <th>Kode Barang</th>
                   <th>Nama Barang</th>
 				  <th>Quantity</th>
-				  <th>Harga</th>
-				  <th>Total Harga</th>
+				  <th width="14%">Harga</th>
+				  <th width="14%">Total Harga</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -83,8 +83,8 @@ include_once "../../config/fungsi_indotgl.php";
 					<td><?php echo $myData['kodebarang']; ?></td>
 					<td><?php echo $myData['namabarang']; ?></td>
 					<td><?php echo $myData['quantity']; ?></td>
-					<td><?php echo $myData['harga']; ?></td>
-					<td><?php echo $myData['total']; ?></td>
+					<td><?php echo "Rp. ".number_format($myData['harga'], 0, ".", "."); ?></td>
+					<td><?php echo "Rp. ".number_format($myData['total'], 0, ".", "."); ?></td>
 					
 		</tr>
 		<?php 
@@ -110,9 +110,9 @@ include_once "../../config/fungsi_indotgl.php";
 ?>		
 		<tr>
 			<td colspan="5"><b>Total </b></td>
-			<td align="leaf"><b><?php echo number_format($total_keluar); ?></b></td>
-			<td align="leaf"><b><?php echo number_format($total_harga); ?></b></td>
-			<td align="leaf"><b><?php echo number_format($total_keseluruhan); ?></b></td>
+			<td align="leaf"><b><?php echo number_format($total_keluar, 0, ".", "."); ?></b></td>
+			<td align="leaf"><b><?php echo "Rp. ".number_format($total_harga, 0, ".", "."); ?></b></td>
+			<td align="leaf"><b><?php echo "Rp. ".number_format($total_keseluruhan, 0, ".", "."); ?></b></td>
 		</tr>
 		
 		
