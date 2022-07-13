@@ -69,6 +69,7 @@ include_once "../../config/fungsi_indotgl.php";
 
 	$bulan 	= $_POST['bulan'];
 	$tahun	= $_POST['tahun'];
+	$q = 0;
 	$ht = 0;
 	$mySql = "SELECT * FROM masuk,stock 
 				WHERE masuk.kodebarang = stock.kodebarang 
@@ -78,6 +79,7 @@ include_once "../../config/fungsi_indotgl.php";
 	$nomor = 0; 
 	while ($myData = mysql_fetch_array($myQry)) {
 	$nomor++;
+	$q += $myData['quantity'];
 	$ht += ($myData['harga'] * $myData['quantity']);
 ?>
 
@@ -108,7 +110,8 @@ include_once "../../config/fungsi_indotgl.php";
 	
 ?>		
 		<tr>
-			<td colspan="6"><b>Total </b></td>
+			<td colspan="5"><b>Total </b></td>
+			<td align="leaf"><b><?php echo number_format($q, 0, ".", "."); ?></b></td>
 			<td align="leaf"><b><?php echo "Rp. ".number_format($total_masuk, 0, ".", "."); ?></b></td>
 			<td align="leaf"><b><?php echo "Rp. ".number_format($ht, 0, ".", "."); ?></b></td>
 		</tr>

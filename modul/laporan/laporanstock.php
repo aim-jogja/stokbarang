@@ -32,11 +32,11 @@ include_once "../../config/fungsi_indotgl.php";
         }
     }
     
-    // foreach($kodeBarang["kode"] as $k){
-    //   echo $k."<br>";
-    // }
+    foreach($kodeBarang["kode"] as $k){
+      echo $k."<br>";
+    }
     
-    // echo "<br>";
+    echo "<br>";
     $e = mysql_query($query, $koneksidb)  or die ("Query salah : ".mysql_error());
     while ($m = mysql_fetch_array($e)) {
       for($i =0; $i<sizeof($kodeBarang["kode"]); $i++){
@@ -48,18 +48,18 @@ include_once "../../config/fungsi_indotgl.php";
       }
     }
 
-    // for($i =0; $i<sizeof($kodeBarang["kode"]); $i++){
-    //     echo "Kode : ".$kodeBarang["kode"][$i]." Harga : ".$kodeBarang["harga"][$i]." Quantity : ".$kodeBarang["quantity"][$i]."<br>";
-    // }
+    for($i =0; $i<sizeof($kodeBarang["kode"]); $i++){
+        echo "Kode : ".$kodeBarang["kode"][$i]." Harga : ".$kodeBarang["harga"][$i]." Quantity : ".$kodeBarang["quantity"][$i]."<br>";
+    }
     $kBarang = $kodeBarang;
 
     for($i =0; $i<sizeof($kodeBarang["kode"]); $i++){
       $kodeBarang["harga"][$i] = (int)($kodeBarang["harga"][$i] / $kodeBarang["quantity"][$i]);
     }
-    // echo "<br>";echo "<br>";
-    // for($i =0; $i<sizeof($kodeBarang["kode"]); $i++){
-    //   echo "Kode : ".$kodeBarang["kode"][$i]." Harga : ".$kodeBarang["harga"][$i]." Quantity : ".$kodeBarang["quantity"][$i]."<br>";
-    // }
+    echo "<br>";echo "<br>";
+    for($i =0; $i<sizeof($kodeBarang["kode"]); $i++){
+      echo "Kode : ".$kodeBarang["kode"][$i]." Harga : ".$kodeBarang["harga"][$i]." Quantity : ".$kodeBarang["quantity"][$i]."<br>";
+    }
   ?>
 <table border="1" cellpadding="1" cellspacing="0">
 	<thead>
@@ -103,8 +103,8 @@ include_once "../../config/fungsi_indotgl.php";
             for($i =0; $i<sizeof($kBarang["kode"]); $i++){
               if($myData["kodebarang"] == $kBarang["kode"][$i]){
                 if(($myData["stock"] + 0) != 0){
-                  echo "Rp. ".number_format($kBarang["harga"][$i], 0, ".", ".");
-                  $ht += $kBarang["harga"][$i];
+                  echo "Rp. ".number_format($myData['stock'] * $kodeBarang["harga"][$i], 0, ".", ".");
+                  $ht += ($myData['stock'] * $kodeBarang["harga"][$i]);
                 }
               }
             }
